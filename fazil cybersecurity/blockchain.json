@@ -1,0 +1,96 @@
+{
+  "chain": [
+    {
+      "index": 0,
+      "transactions": [],
+      "timestamp": "2026-03-16 15:15:09",
+      "previous_hash": "0",
+      "nonce": 599,
+      "hash": "00009e454c4f54913d8236f80c25a970ab6fd2366cba5e50445119c7e7282de6"
+    },
+    {
+      "index": 1,
+      "transactions": [
+        {
+          "rollno": "237Z1A67D2",
+          "position": "President",
+          "candidate": "NOTA",
+          "timestamp": "2026-03-17 11:27:26"
+        },
+        {
+          "rollno": "237Z1A67D2",
+          "position": "Vice President",
+          "candidate": "NOTA",
+          "timestamp": "2026-03-17 11:27:26"
+        },
+        {
+          "rollno": "237Z1A67D2",
+          "position": "Secretary",
+          "candidate": "reddy",
+          "timestamp": "2026-03-17 11:27:26"
+        },
+        {
+          "rollno": "237Z1A67D2",
+          "position": "Treasury",
+          "candidate": "sumath",
+          "timestamp": "2026-03-17 11:27:26"
+        },
+        {
+          "rollno": "237Z1A67D9",
+          "position": "President",
+          "candidate": "NOTA",
+          "timestamp": "2026-03-17 11:39:10"
+        },
+        {
+          "rollno": "237Z1A67D9",
+          "position": "Vice President",
+          "candidate": "NOTA",
+          "timestamp": "2026-03-17 11:39:10"
+        },
+        {
+          "rollno": "237Z1A67D9",
+          "position": "Secretary",
+          "candidate": "reddy",
+          "timestamp": "2026-03-17 11:39:10"
+        },
+        {
+          "rollno": "237Z1A67D9",
+          "position": "Treasury",
+          "candidate": "sumath",
+          "timestamp": "2026-03-17 11:39:10"
+        }
+      ],
+      "timestamp": "2026-03-17 11:39:10",
+      "previous_hash": "00009e454c4f54913d8236f80c25a970ab6fd2366cba5e50445119c7e7282de6",
+      "nonce": 100437,
+      "hash": "00009a643545adfd0cc94bc0b0306650786986c1dd77e8fd3d59c5fb7698b40c"
+    }
+  ],
+  "difficulty": 4,
+  "pending_transactions": [
+    {
+      "rollno": "247Z5A6701",
+      "position": "President",
+      "candidate": "NOTA",
+      "timestamp": "2026-04-20 13:10:29"
+    },
+    {
+      "rollno": "247Z5A6701",
+      "position": "Vice President",
+      "candidate": "sriker",
+      "timestamp": "2026-04-20 13:10:29"
+    },
+    {
+      "rollno": "247Z5A6701",
+      "position": "Secretary",
+      "candidate": "NOTA",
+      "timestamp": "2026-04-20 13:10:29"
+    },
+    {
+      "rollno": "247Z5A6701",
+      "position": "Treasury",
+      "candidate": "NOTA",
+      "timestamp": "2026-04-20 13:10:29"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual envs
+.venv/
+venv/
+ENV/
+
+a# Environment files
+.env
+
+# Databases
+*.db
+voting.db
+database.db
+
+# Secrets / keys
+*.pem
+*.key
+
+# Uploads (user/candidate images)
+static/uploads/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+*.swp
+

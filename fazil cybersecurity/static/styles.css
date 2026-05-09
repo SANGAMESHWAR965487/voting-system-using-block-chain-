@@ -1,0 +1,452 @@
+/* ============================================
+   College Online Voting System - Stylesheet
+   ============================================ */
+
+/* CSS Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at top, rgba(40, 102, 204, 0.85), rgba(15, 26, 58, 0.95) 65%),
+                linear-gradient(135deg, #0b1e3b 0%, #1a3a6e 35%, #1e3c72 60%, #2a5298 100%);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding: 40px 20px;
+    color: #f2f6ff;
+}
+
+/* Typography */
+h2 {
+    color: #1e3c72;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+h3 {
+    color: #1e3c72;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+h4 {
+    color: #1e3c72;
+    margin: 20px 0 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+p {
+    color: #666;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Container/Card Styles */
+.container {
+    max-width: 450px;
+    margin: 0 auto;
+    background: rgba(15, 25, 55, 0.78);
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.container-large {
+    max-width: 750px;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background: white;
+    color: #1e1e1e;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: rgba(80, 160, 255, 0.9);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(80, 160, 255, 0.2);
+}
+
+/* Radio Button Styles */
+.radio-group {
+    margin: 15px 0;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.radio-option:hover {
+    background: #e8f0fe;
+    border-color: #1e3c72;
+}
+
+.radio-option input[type="radio"] {
+    margin-right: 12px;
+    width: 18px;
+    height: 18px;
+    accent-color: #1e3c72;
+    cursor: pointer;
+}
+
+.radio-label {
+    font-weight: 500;
+    color: #333;
+}
+
+.symbol {
+    color: #666;
+    font-size: 14px;
+    margin-left: 8px;
+}
+
+/* Button Styles */
+.btn {
+    width: 100%;
+    padding: 16px 22px;
+    background: linear-gradient(145deg, #3a66c9 0%, #1b3c7f 100%);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25), inset 0 -2px 0 rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    margin-top: 16px;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 25px rgba(0, 0, 0, 0.3), inset 0 -2px 0 rgba(0, 0, 0, 0.12);
+}
+
+.btn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background: linear-gradient(145deg, #6f7ce9 0%, #a654db 100%);
+}
+
+.btn-secondary:hover {
+    box-shadow: 0 14px 25px rgba(0, 0, 0, 0.3), inset 0 -1px 0 rgba(0, 0, 0, 0.14);
+}
+
+/* Link Styles */
+.link {
+    color: #1e3c72;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.link:hover {
+    color: #2a5298;
+    text-decoration: underline;
+}
+
+/* Message Styles */
+.message {
+    text-align: center;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.message-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Results Page Styles */
+.results-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(20, 40, 70, 0.55);
+    border-radius: 10px;
+    border-left: 4px solid rgba(90, 160, 255, 0.8);
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    margin: 10px 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.result-candidate {
+    font-weight: 600;
+    color: #333;
+}
+
+.result-votes {
+    font-weight: 700;
+    color: #1e3c72;
+    background: #e8f0fe;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+/* Vote Page Specific Styles */
+.position-section {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.position-title {
+    color: #1e3c72;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #1e3c72;
+}
+
+.nota-option {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #ccc;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 20px 15px;
+    }
+    
+    .container {
+        padding: 25px;
+        border-radius: 12px;
+    }
+    
+    h2 {
+        font-size: 24px;
+    }
+    
+    h3 {
+        font-size: 18px;
+    }
+    
+    .result-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Register Page Specific */
+.register-container {
+    max-width: 450px;
+    margin: 20px auto;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.register-header h2 {
+    color: #1e3c72;
+    margin-bottom: 10px;
+}
+
+/* Input with Icons */
+.input-icon-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-icon-wrapper input {
+    padding-left: 40px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+/* Checkbox/Radio custom styling */
+input[type="radio"]:checked + span {
+    font-weight: 600;
+}
+
+/* Button group */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.button-group .btn {
+    flex: 1;
+    margin-top: 0;
+}
+
+/* Button group row style for vote page */
+.button-group-row {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.button-group-row .btn {
+    flex: 1;
+    margin-top: 0;
+}
+
+/* Divider */
+.divider {
+    height: 1px;
+    background: #e0e0e0;
+    margin: 20px 0;
+}
+
+/* Back button style */
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.18);
+    color: #f2f6ff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: rgba(255, 255, 255, 0.28);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+}
+
+/* Results Control in Admin */
+.results-control {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(20, 40, 70, 0.55);
+    border-radius: 10px;
+    border-left: 4px solid rgba(90, 160, 255, 0.8);
+}
+
+.results-control h3 {
+    color: #f2f6ff;
+    margin-bottom: 15px;
+}
+
+.results-control p {
+    color: #f2f6ff;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.release-form {
+    margin-top: 10px;
+}
+
+.release-form .btn {
+    width: auto;
+    padding: 12px 24px;
+}
+
+.btn-danger {
+    background: linear-gradient(145deg, #dc3545 0%, #a71d2a 100%);
+}
+
+.btn-danger:hover {
+    background: linear-gradient(145deg, #c82333 0%, #8b151c 100%);
+}
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blockchain Explorer</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%); color: #e0e0e0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; background: rgba(30, 40, 60, 0.8); border-radius: 15px; padding: 30px; }
+        h1 { text-align: center; color: #667eea; margin-bottom: 30px; }
+        .stats { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
+        .stat { background: rgba(100, 100, 255, 0.2); padding: 15px; border-radius: 10px; text-align: center; flex: 1; min-width: 150px; }
+        .block { background: rgba(50, 60, 80, 0.6); margin-bottom: 20px; border-radius: 10px; padding: 20px; border-left: 4px solid #667eea; }
+        .block-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .block-index { font-size: 24px; font-weight: bold; color: #66ff99; }
+        .block-hash { font-family: monospace; color: #8888aa; word-break: break-all; }
+        .tx-list { margin-top: 15px; }
+        .tx { background: rgba(0,0,0,0.3); padding: 12px; margin-bottom: 10px; border-radius: 8px; }
+        .valid { color: #66ff99; } .invalid { color: #ff6666; }
+        .pending { background: rgba(255, 165, 0, 0.2); padding: 20px; border-radius: 10px; }
+        button { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; margin: 10px 5px 0 0; }
+        button:hover { transform: translateY(-2px); }
+        .back { position: absolute; top: 20px; left: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back btn">← Back to Login</a>
+        <h1>🔗 Blockchain Explorer</h1>
+        
+        <div class="stats">
+            <div class="stat"><b>{{ blocks|length }}</b><br>Blocks</div>
+            <div class="stat"><b>{{ total_txs }}</b><br>Transactions</div>
+            <div class="stat"><b>{{ pending|length }}</b><br>Pending TX</div>
+            <div class="stat {{ 'valid' if valid else 'invalid' }}">
+                <b>{{ 'Valid' if valid else 'Invalid' }}</b><br>Chain Status
+            </div>
+        </div>
+
+        {% if pending %}
+        <div class="pending">
+            <h3>⏳ Pending Transactions</h3>
+            {% for tx in pending %}
+            <div class="tx">
+                👤 {{ tx.rollno }} → {{ tx.position }}: {{ tx.candidate }} ({{ tx.timestamp }})
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <h3>Blocks</h3>
+        {% for block in blocks %}
+        <div class="block">
+            <div class="block-header">
+                <span class="block-index">#{{ block.index }}</span>
+                <span class="block-hash">Hash: {{ block.hash[:32] }}...</span>
+            </div>
+            <p><b>Prev Hash:</b> {{ block.previous_hash[:32] }}...</p>
+            <p><b>Timestamp:</b> {{ block.timestamp }} | <b>Nonce:</b> {{ block.nonce }}</p>
+            {% if block.transactions %}
+            <div class="tx-list">
+                <h4>{{ block.transactions|length }} Vote Transactions</h4>
+                {% for tx in block.transactions %}
+                <div class="tx">
+                    🗳️ {{ tx.rollno }} voted {{ tx.position }}: {{ tx.candidate }} ({{ tx.timestamp }})
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="/mine"><button>⛏️ Mine Block (Admin)</button></a>
+            <a href="/verify_chain"><button>🔍 Verify Chain</button></a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voting Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container container-large">
+        <h2 style="background: linear-gradient(90deg, #ffffff, #a8c0ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">College Election Results</h2>
+        <a href="/admin" class="btn btn-secondary back-link">← Back to Admin</a>
+        
+        {% if results_not_released %}
+        <div class="message" style="text-align: center; padding: 40px;">
+            <h3 style="color: red;">Results Not Released Yet</h3>
+            <p>Please wait for the admin to release the results.</p>
+        </div>
+        {% else %}
+        
+        <div class="results-section">
+            <h3>President</h3>
+            {% for r in president %}
+            <div class="result-item">
+                <span class="result-candidate">{{ r.candidate }}</span>
+                <span class="result-votes">{{ r.votes }} votes</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="results-section">
+            <h3>Vice President</h3>
+            {% for r in vice %}
+            <div class="result-item">
+                <span class="result-candidate">{{ r.candidate }}</span>
+                <span class="result-votes">{{ r.votes }} votes</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="results-section">
+            <h3>Secretary</h3>
+            {% for r in secretary %}
+            <div class="result-item">
+                <span class="result-candidate">{{ r.candidate }}</span>
+                <span class="result-votes">{{ r.votes }} votes</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="results-section">
+            <h3>Treasury</h3>
+            {% for r in treasury %}
+            <div class="result-item">
+                <span class="result-candidate">{{ r.candidate }}</span>
+                <span class="result-votes">{{ r.votes }} votes</span>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% endif %}
+    </div>
+</body>
+</html>
+

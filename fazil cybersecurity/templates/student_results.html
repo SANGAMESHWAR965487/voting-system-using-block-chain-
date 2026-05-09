@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voting Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .marquee-container {
+            background: linear-gradient(90deg, #ff6b6b, #ffa500, #ff6b6b);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .marquee-text {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .results-released-badge {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-large">
+        <h2 style="background: linear-gradient(90deg, #ffffff, #a8c0ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">College Election Results</h2>
+        
+        <a href="/vote" class="btn btn-secondary back-link">← Back to Vote</a>
+        
+        {% if not results_released %}
+        <div class="marquee-container">
+            <div class="marquee-text">⚠️ The results are about to release soon... Please wait for the admin to announce the results! ⚠️</div>
+        </div>
+        {% else %}
+        
+        <div class="results-released-badge">
+            ✓ Results Released!
+        </div>
+        
+        <div class="results-section">
+            <h3>President</h3>
+            {% for r in president %}
+            <div class="result-item">
+                <span class="result-candidate">{{ r.candidate }}</span>
+                <span class="result-votes">{{ r.votes }} votes</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="results-section">
+            <h3>Vice President</h3>
+            {% for r in vice %}
+            <div class="result-item">
+                <span class="result-candidate">{{ r.candidate }}</span>
+                <span class="result-votes">{{ r.votes }} votes</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="results-section">
+            <h3>Secretary</h3>
+            {% for r in secretary %}
+            <div class="result-item">
+                <span class="result-candidate">{{ r.candidate }}</span>
+                <span class="result-votes">{{ r.votes }} votes</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="results-section">
+            <h3>Treasury</h3>
+            {% for r in treasury %}
+            <div class="result-item">
+                <span class="result-candidate">{{ r.candidate }}</span>
+                <span class="result-votes">{{ r.votes }} votes</span>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% endif %}
+    </div>
+</body>
+</html>
+

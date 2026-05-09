@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Candidate Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #f2f6ff;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(20, 40, 70, 0.55);
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(100, 100, 255, 0.2);
+        }
+        
+        h2 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 32px;
+            font-weight: 700;
+        }
+        
+        h3 {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        p {
+            color: #8888aa;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            color: #ccccdd;
+            margin-bottom: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #2a2a4a;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: #0f0f1e;
+            color: #e0e0e0;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            background: #151528;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+        }
+        
+        input[type="text"]::placeholder {
+            color: #555577;
+        }
+        
+        input[type="file"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #2a2a4a;
+            border-radius: 10px;
+            font-size: 15px;
+            background: #0f0f1e;
+            color: #e0e0e0;
+        }
+        
+        .radio-group {
+            margin: 15px 0;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: #0f0f1e;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .radio-option:hover {
+            background: #151528;
+            border-color: #667eea;
+        }
+        
+        .radio-option input[type="radio"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: #667eea;
+            cursor: pointer;
+        }
+        
+        .radio-label {
+            font-weight: 500;
+            color: #e0e0e0;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 16px 22px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 16px;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(145deg, #6f7ce9 0%, #a654db 100%);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(145deg, #dc3545 0%, #a71d2a 100%);
+        }
+        
+        .btn-small {
+            width: auto;
+            padding: 8px 16px;
+            margin-top: 0;
+            font-size: 14px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .button-group .btn {
+            flex: 1;
+            margin-top: 0;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #f2f6ff;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.2s ease;
+        }
+        
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+        }
+        
+        .results-control {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(30, 50, 80, 0.5);
+            border-radius: 10px;
+            border: 1px solid rgba(100, 100, 255, 0.2);
+        }
+        
+        .results-control h3 {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+        
+        .results-control p {
+            color: #8888aa;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        
+        .release-form {
+            margin-top: 10px;
+        }
+        
+        .release-form .btn {
+            width: auto;
+            padding: 12px 24px;
+            margin-top: 0;
+        }
+        
+        .message {
+            text-align: center;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        
+        .message-success {
+            background: rgba(100, 255, 150, 0.2);
+            color: #66ff99;
+            border: 1px solid rgba(100, 255, 150, 0.3);
+        }
+        
+        /* Pending Users Section */
+        .pending-users {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(30, 50, 80, 0.5);
+            border-radius: 10px;
+            border: 1px solid rgba(100, 100, 255, 0.2);
+        }
+        
+        .pending-users h3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .user-card {
+            background: #0f0f1e;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #2a2a4a;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-info p {
+            text-align: left;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        .user-info .name {
+            color: #e0e0e0;
+            font-weight: 600;
+        }
+        
+        .user-info .details {
+            color: #8888aa;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-approve {
+            background: linear-gradient(145deg, #28a745, #1e7e34);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-approve:hover {
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+        
+        .btn-reject {
+            background: linear-gradient(145deg, #dc3545, #a71d2a);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-reject:hover {
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+        }
+        
+        .no-pending {
+            text-align: center;
+            padding: 20px;
+            color: #8888aa;
+        }
+        
+        .status-released {
+            color: #66ff99 !important;
+            font-weight: bold;
+        }
+        
+        .status-hidden {
+            color: #ff6666 !important;
+            font-weight: bold;
+        }
+        
+        .status-open {
+            color: #66ff99 !important;
+            font-weight: bold;
+        }
+        
+        .status-closed {
+            color: #ff6666 !important;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="/registered_students">📋 Registered Students</a>
+            <a href="/results">📊 View Results</a>
+            <a href="/admin/rules">🆔 Eligibility Rules</a>
+            <a href="/visualize">📈 Analytics</a>
+        </div>
+        
+        <h2>Admin Panel</h2>
+        <p>Candidate Registration</p>
+        <a href="/" class="back-link">← Back to Login</a>
+
+        <form action="/add_candidate" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="candidate_name">Candidate Name</label>
+                <input type="text" id="candidate_name" name="candidate_name" placeholder="Enter candidate name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="candidate_symbol">Candidate Symbol</label>
+                <input type="text" id="candidate_symbol" name="candidate_symbol" placeholder="Enter candidate symbol" required>
+            </div>
+
+            <div class="form-group">
+                <label for="candidate_image">Candidate Photo (Optional)</label>
+                <input type="file" id="candidate_image" name="candidate_image" accept="image/*">
+            </div>
+
+            <label>Select Position</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" name="position" value="President" id="president">
+                    <span class="radio-label">President</span>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" name="position" value="Vice President" id="vice_president">
+                    <span class="radio-label">Vice President</span>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" name="position" value="Secretary" id="secretary">
+                    <span class="radio-label">Secretary</span>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" name="position" value="Treasury" id="treasury">
+                    <span class="radio-label">Treasury</span>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn">Add Candidate</button>
+            </div>
+        </form>
+
+        <!-- Pending Users Section -->
+        {% if pending_users %}
+        <div class="pending-users">
+            <h3>
+                ⏳ Pending Registrations 
+                <span class="badge">{{ pending_users|length }}</span>
+            </h3>
+            
+            {% for user in pending_users %}
+            <div class="user-card">
+                <div class="user-info">
+                    <p class="name">{{ user.name }}</p>
+                    <p class="details">📱 {{ user.mobile }} | 📧 {{ user.email }}</p>
+                    <p class="details">🆔 {{ user.rollno }}</p>
+                </div>
+                <div class="user-actions">
+                    <form action="/approve_user" method="post" style="display: inline;">
+                        <input type="hidden" name="rollno" value="{{ user.rollno }}">
+                        <button type="submit" class="btn-approve">✓ Approve</button>
+                    </form>
+                    <form action="/reject_user" method="post" style="display: inline;">
+                        <input type="hidden" name="rollno" value="{{ user.rollno }}">
+                        <button type="submit" class="btn-reject" onclick="return confirm('Are you sure you want to reject this registration?')">✗ Reject</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="pending-users">
+            <h3>⏳ Pending Registrations</h3>
+            <p class="no-pending">No pending registrations</p>
+        </div>
+        {% endif %}
+
+        <div class="results-control">
+            <h3>📊 Results Visibility</h3>
+            <p>Current Status: 
+                {% if results_released == 'true' %}
+                    <span class="status-released">Released - Students can view</span>
+                {% else %}
+                    <span class="status-hidden">Not Released - Hidden from students</span>
+                {% endif %}
+            </p>
+            <form action="/release_results" method="post" class="release-form">
+                {% if results_released == 'true' %}
+                    <button type="submit" name="action" value="hide" class="btn btn-danger">Hide Results</button>
+                {% else %}
+                    <button type="submit" name="action" value="release" class="btn">Release Results</button>
+                {% endif %}
+            </form>
+        </div>
+
+        <div class="results-control">
+            <h3>🗳️ Voting Status</h3>
+            <p>Current Status: 
+                {% if voting_open == 'true' %}
+                    <span class="status-open">Open - Students can vote</span>
+                {% else %}
+                    <span class="status-closed">Closed - Students cannot vote</span>
+                {% endif %}
+            </p>
+            <form action="/release_results" method="post" class="release-form">
+                {% if voting_open == 'true' %}
+                    <button type="submit" name="action" value="close_voting" class="btn btn-danger">Close Voting</button>
+                {% else %}
+                    <button type="submit" name="action" value="open_voting" class="btn">Open Voting</button>
+                {% endif %}
+            </form>
+        </div>
+
+        <!-- ── ONLY THIS SECTION CHANGED: Clear Votes button added ── -->
+        <div class="results-control">
+            <h3>🗑️ Manage Candidates</h3>
+            <p>Clear candidates to add new ones. Clear Votes resets all votes so students can vote again.</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
+                <form action="/release_results" method="post" style="display: inline;">
+                    <button type="submit" name="action" value="clear_candidates" class="btn btn-danger btn-small"
+                        onclick="return confirm('Are you sure you want to clear all candidates?')">
+                        🗑️ Clear All Candidates
+                    </button>
+                </form>
+                <form action="/release_results" method="post" style="display: inline;">
+                    <button type="submit" name="action" value="clear_votes" class="btn btn-danger btn-small"
+                        onclick="return confirm('Clear ALL votes? Students voted flag will also reset so they can vote again.')">
+                        🔄 Clear All Votes
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- ── END CHANGE ── -->
+
+        <div class="results-control">
+            <h3>🔗 Blockchain Management</h3>
+            <p>Tamper-proof vote ledger. View & mine blocks for immutability.</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="/blockchain" class="btn btn-small">View Blockchain</a>
+                <a href="/mine" class="btn btn-small">⛏️ Mine Block</a>
+                <a href="/verify_chain" class="btn btn-small">Verify Chain</a>
+            </div>
+        </div>
+
+        {% if message %}
+        <div class="message message-success">
+            {{ message }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

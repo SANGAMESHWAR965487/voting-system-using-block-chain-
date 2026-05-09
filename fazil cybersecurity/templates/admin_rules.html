@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Roll No Eligibility Rules</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #f2f6ff;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(20, 40, 70, 0.55);
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.35);
+            border: 1px solid rgba(100,100,255,0.2);
+        }
+        h2 { color: #667eea; text-align: center; margin-bottom: 8px; font-size: 28px; font-weight: 700; }
+        .subtitle { color: #8888aa; text-align: center; margin-bottom: 30px; font-size: 14px; }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            padding: 10px 14px;
+            background: rgba(255,255,255,0.1);
+            color: #f2f6ff;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.2s ease;
+        }
+        .back-link:hover { background: rgba(255,255,255,0.2); }
+
+        .section-card {
+            background: rgba(30, 50, 80, 0.5);
+            border: 1px solid rgba(100, 100, 255, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .section-card h3 { color: #e0e0e0; font-size: 18px; margin-bottom: 6px; }
+        .section-card p { color: #8888aa; font-size: 13px; margin-bottom: 18px; }
+
+        label { display: block; font-weight: 600; color: #ccccdd; margin-bottom: 6px; font-size: 14px; }
+        .form-group { margin-bottom: 18px; }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #2a2a4a;
+            border-radius: 10px;
+            font-size: 15px;
+            background: #0f0f1e;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102,126,234,0.2);
+        }
+        input[type="text"]::placeholder { color: #555577; }
+        input[type="text"][readonly] { background: #1a1a2e; color: #666688; cursor: not-allowed; }
+
+        select[multiple] { height: 120px; }
+        select option { padding: 6px; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .preview-box {
+            background: #0f0f1e;
+            border: 1px solid #2a2a4a;
+            border-radius: 8px;
+            padding: 14px 18px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #aad4ff;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+        }
+        .preview-label { font-size: 12px; color: #555577; margin-bottom: 4px; }
+
+        .btn {
+            width: 100%;
+            padding: 15px 22px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(102,126,234,0.3);
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(102,126,234,0.4); }
+        .btn:active { transform: translateY(0) scale(0.98); }
+
+        .message {
+            text-align: center;
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 500;
+            background: rgba(100,255,150,0.2);
+            color: #66ff99;
+            border: 1px solid rgba(100,255,150,0.3);
+        }
+
+        .badge-hint {
+            display: inline-block;
+            font-size: 11px;
+            background: rgba(102,126,234,0.2);
+            color: #9baaf3;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-left: 8px;
+            font-weight: 400;
+        }
+
+        .example-roll {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #667eea;
+        }
+
+        small { color: #666688; font-size: 12px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="/admin" class="back-link">← Back to Admin Panel</a>
+
+    <h2>🆔 Roll No Eligibility Rules</h2>
+    <p class="subtitle">Define which students are eligible to register based on their Roll Number format</p>
+
+    <div class="section-card">
+        <h3>Roll Number Pattern Preview</h3>
+        <p>The pattern is auto-built from the fields below. Example match shown live.</p>
+        <p class="preview-label">Generated pattern:</p>
+        <div class="preview-box" id="pattern-preview">237Z1A05<strong>01</strong></div>
+        <p class="example-label" style="font-size:12px; color:#667eea; margin-top:4px;">
+            ↑ Sample: Year + College Code + Entry + Course + Dept + Serial
+        </p>
+    </div>
+
+    <form action="/update_rules" method="post">
+        <div class="section-card">
+            <h3>Basic Identifiers</h3>
+            <p>Fixed college segment of the roll number.</p>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Admission Year <span class="badge-hint">2 digits</span></label>
+                    <input type="text" name="year" id="f-year" placeholder="e.g. 23"
+                           value="{{ election_rules.year if election_rules else '23' }}"
+                           required maxlength="2">
+                </div>
+                <div class="form-group">
+                    <label>College Code <span class="badge-hint">fixed</span></label>
+                    <input type="text" name="clg_code" value="7Z" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h3>Entry &amp; Course</h3>
+            <p>Lateral entry and branch course configuration.</p>
+            <div class="form-group">
+                <label>Lateral Entry Allowed?</label>
+                <select name="entry_code" id="f-entry">
+                    <option value="1"  {% if election_rules and election_rules.entry_code == '1'    %}selected{% endif %}>1 — Regular only</option>
+                    <option value="5"  {% if election_rules and election_rules.entry_code == '5'    %}selected{% endif %}>5 — Lateral only</option>
+                    <option value="both" {% if not election_rules or election_rules.entry_code == 'both' %}selected{% endif %}>1 &amp; 5 — Both</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Course Code <span class="badge-hint">1 character</span></label>
+                <input type="text" name="course_code" id="f-course"
+                       value="{{ election_rules.course_code if election_rules else 'A' }}"
+                       placeholder="A" required maxlength="1">
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h3>Departments &amp; Roll Range</h3>
+            <p>Select eligible departments and maximum serial number allowed.</p>
+            <div class="form-group">
+                <label>Departments <span class="badge-hint">Ctrl+click for multiple</span></label>
+                <select name="depts" id="f-depts" multiple>
+                    {% set sel = election_rules.allowed_depts if election_rules else ['67'] %}
+                    <option value="01" {% if '01' in sel %}selected{% endif %}>01 — Civil Engineering</option>
+                    <option value="02" {% if '02' in sel %}selected{% endif %}>02 — EEE</option>
+                    <option value="04" {% if '04' in sel %}selected{% endif %}>04 — ECE</option>
+                    <option value="05" {% if '05' in sel %}selected{% endif %}>05 — CSE</option>
+                    <option value="66" {% if '66' in sel %}selected{% endif %}>66 — AI &amp; ML</option>
+                    <option value="67" {% if '67' in sel %}selected{% endif %}>67 — Data Science</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Maximum Roll Serial <span class="badge-hint">last 2 chars</span></label>
+                <input type="text" name="max_range" id="f-range"
+                       placeholder="e.g. G0 or 60"
+                       value="{{ election_rules.max_range if election_rules else 'Z9' }}"
+                       required maxlength="2">
+                <small>Sequence: 01–99 → A0–A9, B0–B9 … Z0–Z9</small>
+            </div>
+        </div>
+
+        <button type="submit" class="btn">💾 Save Eligibility Rules</button>
+    </form>
+
+    {% if message %}
+    <div class="message">{{ message }}</div>
+    {% endif %}
+</div>
+
+<script>
+function updatePreview() {
+    const year   = document.getElementById('f-year').value   || 'YY';
+    const entry  = document.getElementById('f-entry').value;
+    const course = document.getElementById('f-course').value || 'X';
+    const range  = document.getElementById('f-range').value  || '??';
+    const deptSel = document.getElementById('f-depts').selectedOptions;
+    const depts  = deptSel.length ? [...deptSel].map(o=>o.value).join('/') : 'DD';
+    const entryStr = entry === 'both' ? '1or5' : entry;
+    document.getElementById('pattern-preview').textContent =
+        `${year}7Z${entryStr}${course}${depts} — up to serial ${range.toUpperCase()}`;
+}
+['f-year','f-entry','f-course','f-range','f-depts'].forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener('input', updatePreview);
+    el.addEventListener('change', updatePreview);
+});
+updatePreview();
+</script>
+</body>
+</html>
